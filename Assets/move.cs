@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class moveleg : MonoBehaviour
-{
+using TMPro;
+public class move : MonoBehaviour
+{   
+    enum joint
+    {
+        knee,
+        elbow,
+    };
+    [SerializeField]
+    joint js= new joint();
     float gyrox;
     float gyroy;
     float accx;
@@ -12,6 +19,8 @@ public class moveleg : MonoBehaviour
     public string[] data;
     float errgx;
 
+    [SerializeField]
+    TMP_Text angText;
     float errgy;
 
     float errax;
@@ -71,7 +80,18 @@ public class moveleg : MonoBehaviour
             int angle_x = (int)((alpha * accx + (1 - alpha) * gyrox) * scale);
             int angle_y = (int)((alpha * accy + (1 - alpha) * gyroy) * scale);
             Debug.Log(angle_y);
-            leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,0,180),(new Vector3(-1*angle_y,0,180)),1f);
+            switch (js)
+            {
+                
+                case joint.elbow:
+                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,leg.transform.rotation.y,leg.transform.rotation.z),(new Vector3(0,0,(angle_y))),1f);
+                    break;
+                case joint.knee:
+                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,0,180),(new Vector3(-1*angle_y,0,180)),1f);  
+                    break;
+            }
+            
+            angText.text = "ANGLE: "+angle_y+"° ";
         }
     }
 }

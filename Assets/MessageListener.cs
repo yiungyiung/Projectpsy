@@ -5,7 +5,7 @@ using UnityEngine;
 public class MessageListener : MonoBehaviour
 {
     public string[] data;
-    public moveleg leg;
+    public move leg;
     void OnMessageArrived(string msg)
     {   
         string[] data =msg.Split(',');
