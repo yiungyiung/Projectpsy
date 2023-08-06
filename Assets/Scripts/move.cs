@@ -64,7 +64,7 @@ public class move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {   
         if(data.Length>3)
         {
@@ -84,10 +84,10 @@ public class move : MonoBehaviour
             {
                 
                 case joint.elbow:
-                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,leg.transform.rotation.y,leg.transform.rotation.z),(new Vector3(0,0,(angle_y))),1f);
+                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,leg.transform.rotation.y,leg.transform.rotation.z),(new Vector3(0,0,(angle_x))),1f);
                     break;
                 case joint.knee:
-                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,0,180),(new Vector3(-1*angle_y,0,180)),1f);  
+                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,0,180),(new Vector3(angle_x,0,180)),1f);  
                     break;
             }
             
