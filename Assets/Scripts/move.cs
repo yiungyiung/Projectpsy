@@ -84,14 +84,14 @@ public class move : MonoBehaviour
             {
                 
                 case joint.elbow:
-                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,leg.transform.rotation.y,leg.transform.rotation.z),(new Vector3(0,0,(angle_x))),1f);
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,(angle_x))),1f);
                     break;
                 case joint.knee:
-                    leg.transform.eulerAngles =  Vector3.Lerp(new Vector3(leg.transform.rotation.x,0,180),(new Vector3(angle_x,0,180)),1f);  
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
                     break;
             }
             
-            angText.text = "ANGLE: "+angle_y+"° ";
+            angText.text = "ANGLE: "+angle_x+"° ";
         }
     }
 }
