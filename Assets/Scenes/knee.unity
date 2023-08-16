@@ -131,7 +131,8 @@ GameObject:
   m_Component:
   - component: {fileID: 20677628}
   - component: {fileID: 20677627}
-  m_Layer: 0
+  - component: {fileID: 20677629}
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,6 +168,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &20677629
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20677626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 5.6939545
+  m_Height: 64.75606
+  m_Direction: 1
+  m_Center: {x: 9.86672, y: 17.18805, z: 13.8}
+--- !u!1 &426913538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426913539}
+  m_Layer: 2
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &426913539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426913538}
+  m_LocalRotation: {x: -0, y: -0.773583, z: -0, w: 0.633695}
+  m_LocalPosition: {x: 265, y: 0, z: 53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: -101.353004, z: 0}
 --- !u!1 &458755818
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +424,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -452,6 +498,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -101.353004, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8d77f7657bef54c9f387ad779e5917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 4
+  raystarter: {fileID: 426913538}
+  spot: {fileID: 5216490779420150756, guid: 88dc10f731bbdfb4a8cb45326e6bd42a, type: 3}
 --- !u!1 &993599786
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1420692257}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Shin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,7 +911,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115665308}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4eaf21c746eeb146aea43966d227144, type: 3}
   m_Name: 
@@ -894,7 +957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653400713481}
   - component: {fileID: 1277917077}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +973,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3121809327562938445}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: shinbot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5134907555349276326}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: shin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,7 +1102,8 @@ GameObject:
   - component: {fileID: 2396417222515086895}
   - component: {fileID: 1617477170310426210}
   - component: {fileID: 6147003597928586734}
-  m_Layer: 0
+  - component: {fileID: 6147003597928586735}
+  m_Layer: 2
   m_Name: Leg Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1059,6 +1123,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 50
+--- !u!136 &6147003597928586735
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6147003597928586733}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.06
+  m_Height: 0.6203969
+  m_Direction: 2
+  m_Center: {x: 0.099999994, y: 0.55, z: -0.2795357}
 --- !u!1 &7036213049228514269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +1146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8879528567022328215}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
