@@ -37,11 +37,11 @@ public class move : MonoBehaviour
     public GameObject leg;
     void calibration()
     {
-        float sumgx = 0;
-        float sumgy = 0;
-        float sumax = 0;
-        float sumay = 0;
-        float sumaz = 0;
+        float sumgx = 1;
+        float sumgy = 1;
+        float sumax = 1;
+        float sumay = 1;
+        float sumaz = 1;
         int i = 0;
         while (i < sample_size)
         {   
@@ -49,19 +49,20 @@ public class move : MonoBehaviour
             gyroy = float.Parse(data[1]);
             accx = float.Parse(data[2]);
             accy = float.Parse(data[3]);
-            sumgx += gyrox;
-            sumgy += gyroy;
-            sumax += accx;
-            sumay += accy;
-            sumaz += accz;
+            sumgx *= gyrox;
+            sumgy *= gyroy;
+            sumax *= accx;
+            sumay *= accy;
+            sumaz *= accz;
             i += 1;
         }
-        errgx = sumgx / sample_size;
-        errgy = sumgy / sample_size;
-        errax = sumax / sample_size;
-        erray = sumay / sample_size;
-        erraz = sumaz / sample_size;
+        errgx = Mathf.Pow(sumgx, 1.0f/ sample_size);
+        errgy = Mathf.Pow(sumgy, 1.0f/ sample_size);
+        errax = Mathf.Pow(sumax, 1.0f/ sample_size);
+        erray = Mathf.Pow(sumay, 1.0f/ sample_size);
+        erraz = Mathf.Pow(sumaz, 1.0f/ sample_size);
     }
+
 
     // Update is called once per frame
     void FixedUpdate()
