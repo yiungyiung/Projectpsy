@@ -7,7 +7,7 @@ using WebSocketSharp;
 public class takewifival : MonoBehaviour
 {
     private WebSocket ws;
-        public move leg;
+        public movesoham leg;
     void Start()
     {
         // Replace with the IP address of your NodeMCU
