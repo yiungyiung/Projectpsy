@@ -25,11 +25,12 @@ public class RayCasting : MonoBehaviour
             {
                 Debug.Log("Hit object: " + hit.point);
                 Vector3 direction = (hit.point - raystarter.transform.position).normalized;
-                //Vector3 spawnPosition = hit.point + direction * 0.01f;
-                Vector3 spawnPosition = hit.point + hit.normal * 0.01f;
+                Vector3 spawnPosition = hit.point + direction * 0.01f;
+                //Vector3 spawnPosition = hit.point + hit.normal * 0.01f;
                 //hit.transform.GetComponent<Renderer>().material.color = Color.red;
                var red = Instantiate(spot, spawnPosition, Quaternion.identity);
                red.transform.parent = leg.transform;
+               red.transform.localEulerAngles= new Vector3(0,0,0);
             }
 
             // Draw a debug line to visualize the ray
