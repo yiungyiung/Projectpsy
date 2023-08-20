@@ -28,7 +28,8 @@ public class movesoham : MonoBehaviour
     // Kalman filter parameters
     KalmanFilter kalmanX;
     KalmanFilter kalmanY;
-
+    KalmanFilter kalmanYa;
+    KalmanFilter kalmanXa;
     [SerializeField]
     TMP_Text angText;
 
@@ -44,6 +45,8 @@ public class movesoham : MonoBehaviour
         // Initialize Kalman filters
         kalmanX = new KalmanFilter();
         kalmanY = new KalmanFilter();
+        kalmanXa=new KalmanFilter();
+        kalmanYa=new KalmanFilter();
     }
 
     void calibration()
@@ -76,6 +79,8 @@ public class movesoham : MonoBehaviour
         // Initialize Kalman filter states after calibration
         kalmanX.SetState(gyrox);
         kalmanY.SetState(gyroy);
+        kalmanXa.SetState(accx);
+        kalmanYa.SetState(accy);
     }
 
     void FixedUpdate()
@@ -96,6 +101,8 @@ public class movesoham : MonoBehaviour
             // Kalman filter prediction and update
             float filteredX = kalmanX.PredictAndUpdate(gyrox);
             float filteredY = kalmanY.PredictAndUpdate(gyroy);
+            float acccx = kalmanY.PredictAndUpdate(accx);
+            float acccy = kalmanY.PredictAndUpdate(accy);
 
             int angle_x = (int)((alpha * accx + (1 - alpha) * filteredX) * scale);
             int angle_y = (int)((alpha * accy + (1 - alpha) * filteredY) * scale);
@@ -106,10 +113,10 @@ public class movesoham : MonoBehaviour
             {
                 
                 case joint.elbow:
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x-90,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
                     break;
                 case joint.knee:
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x-90,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
                     break;
             }
             
