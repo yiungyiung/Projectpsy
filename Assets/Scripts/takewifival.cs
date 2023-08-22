@@ -11,7 +11,7 @@ public class takewifival : MonoBehaviour
     void Start()
     {
         // Replace with the IP address of your NodeMCU
-        string serverAddress = "ws://192.168.4.1:8080";
+        string serverAddress = "ws://192.168.4.2:8080";
 
         ws = new WebSocket(serverAddress);
         ws.OnMessage += OnMessage;

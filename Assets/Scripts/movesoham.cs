@@ -14,7 +14,10 @@ public class movesoham : MonoBehaviour
 
     [SerializeField]
     joint js = new joint();
-
+    [SerializeField]
+    int kneedeviation;
+    [SerializeField]
+    int elbowdeviation;
     float gyrox;
     float gyroy;
     float accx;
@@ -113,10 +116,10 @@ public class movesoham : MonoBehaviour
             {
                 
                 case joint.elbow:
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x-90,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_y+elbowdeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
                     break;
                 case joint.knee:
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x-90,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_y+kneedeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
                     break;
             }
             

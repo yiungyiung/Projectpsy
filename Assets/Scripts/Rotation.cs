@@ -11,38 +11,59 @@ public class Rotation : MonoBehaviour
         Rotate_Z,
     };
     [SerializeField]
-    joint js= new joint();
+    joint js = new joint();
     public float rotationSpeed = 200f;
-    void Rotation_Y(){
-        if (Input.GetMouseButton(0))
+    
+    private bool isPressing = false;
+    private float pressStartTime = 0f;
+    public float longPressDuration = 0.5f; // Adjust this duration as needed
+    
+    void Rotation_Y()
+    {
+        if (isPressing)
         {
             float mouseInputX = Input.GetAxis("Mouse X");
             float rotationChange = mouseInputX * rotationSpeed * Time.deltaTime;
             transform.localRotation *= Quaternion.Euler(0, -rotationChange, 0);
         }
     }
-    void Rotation_X(){
-        if (Input.GetMouseButton(0))
+    
+    void Rotation_X()
+    {
+        if (isPressing)
         {
             float mouseInputY = Input.GetAxis("Mouse Y");
             float rotationChange = mouseInputY * rotationSpeed * Time.deltaTime;
             transform.localRotation *= Quaternion.Euler(rotationChange, 0, 0);
         }
     }
-    void Rotation_Z(){
-        if (Input.GetMouseButton(0))
+    
+    void Rotation_Z()
+    {
+        if (isPressing)
         {
             float mouseInputY = Input.GetAxis("Mouse X");
             float rotationChange = mouseInputY * rotationSpeed * Time.deltaTime;
             transform.localRotation *= Quaternion.Euler(0, 0, -rotationChange);
         }
     }
-    
+
     void Update()
     {
-        switch (js)
+        if (Input.GetMouseButtonDown(0))
+        {
+            isPressing = true;
+            pressStartTime = Time.time;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isPressing = false;
+        }
+
+        if (isPressing && Time.time - pressStartTime > longPressDuration)
+        {
+            switch (js)
             {
-                
                 case joint.Rotate_X:
                     Rotation_X();
                     break;
@@ -53,5 +74,6 @@ public class Rotation : MonoBehaviour
                     Rotation_Y();
                     break;
             }
+        }
     }
 }

@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 1545679336}
   - component: {fileID: 1545679338}
   - component: {fileID: 1545679337}
+  - component: {fileID: 1545679339}
   m_Layer: 2
   m_Name: ARM
   m_TagString: Untagged
@@ -613,7 +614,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545679335}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.17, y: -5, z: 40}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
@@ -628,7 +629,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545679335}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d3b5836841d8b4eb8902018b1742ac, type: 3}
   m_Name: 
@@ -641,12 +642,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545679335}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d2ab59d1f1c9e4f942fd0a3f3e8dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 200
+--- !u!114 &1545679339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545679335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe659ed880b6a35409270b072a01f2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  js: 1
+  rotationSpeed: 200
+  longPressDuration: 0.5
 --- !u!1 &1613982294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,6 +1790,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   js: 1
+  kneedeviation: 0
+  elbowdeviation: 0
   data: []
   angText: {fileID: 1626469794}
   leg: {fileID: 660162179}
