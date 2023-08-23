@@ -11,7 +11,12 @@ public class movesoham : MonoBehaviour
         knee,
         elbow,
     };
-
+    enum angle{
+        x,
+        y,
+    };
+    [SerializeField]
+    angle ang= new angle();
     [SerializeField]
     joint js = new joint();
     [SerializeField]
@@ -24,7 +29,7 @@ public class movesoham : MonoBehaviour
     float accy;
     float accz;
 
-    float errgx, errgy,errax,erray,erraz;
+    float errgx,errgy,errax,erray,erraz;
 
     public string[] data;
     
@@ -39,6 +44,7 @@ public class movesoham : MonoBehaviour
     int sample_size = 500;
     int scale = 10;
 
+    bool cal=false;
     float alpha = 0.91f;
 
     public GameObject leg;
@@ -50,6 +56,12 @@ public class movesoham : MonoBehaviour
         kalmanY = new KalmanFilter();
         kalmanXa=new KalmanFilter();
         kalmanYa=new KalmanFilter();
+        kalmanX.SetState(gyrox);
+        kalmanY.SetState(gyroy);
+        errgx=PlayerPrefs.GetFloat("errgx");
+        errgy=PlayerPrefs.GetFloat("errgy");
+        errax=PlayerPrefs.GetFloat("errax");
+        erray=PlayerPrefs.GetFloat("erray");
     }
 
     void calibration()
@@ -61,6 +73,7 @@ public class movesoham : MonoBehaviour
         float sumay = 0;
         float sumaz = 0;
         int i = 0;
+        cal=false;
         while (i < sample_size)
         {   
             gyrox = float.Parse(data[0]);
@@ -80,21 +93,30 @@ public class movesoham : MonoBehaviour
         erray = sumay / sample_size;
         erraz = sumaz / sample_size;
         // Initialize Kalman filter states after calibration
-        kalmanX.SetState(gyrox);
-        kalmanY.SetState(gyroy);
-        kalmanXa.SetState(accx);
-        kalmanYa.SetState(accy);
+        PlayerPrefs.SetFloat("errgx", errgx);
+        PlayerPrefs.SetFloat("errgy", errgy);
+        PlayerPrefs.SetFloat("errax", errax);
+        PlayerPrefs.SetFloat("erray", erray);
+        Debug.Log("cali complete");
     }
-
+    public void cancal()
+    {
+        cal=true;
+    }
     void FixedUpdate()
     {
         if (data.Length > 3)
         {
             if (Input.GetKeyDown(KeyCode.C))
+            {   
+                Debug.Log("lol");
+                cancal();
+            }
+
+            if(cal)
             {
                 calibration();
             }
-
             // Update sensor readings
             gyrox = float.Parse(data[0]) + (-1) * errgx;
             gyroy = float.Parse(data[1]) + (-1) * errgy;
@@ -122,8 +144,15 @@ public class movesoham : MonoBehaviour
                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_y+kneedeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
                     break;
             }
+            switch (ang){
+            case angle.x:
+                angText.text = "ANGLE: "+angle_x+"° ";
+                break;
+            case angle.y:
+                angText.text = "ANGLE: "+angle_y+"° ";
+                break;
+            }
             
-            angText.text = "ANGLE: "+angle_x+"° ";
         }
     }
 }
