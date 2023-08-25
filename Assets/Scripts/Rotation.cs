@@ -14,7 +14,7 @@ public class Rotation : MonoBehaviour
     joint js = new joint();
     public float rotationSpeed = 200f;
     
-    private bool isPressing = false;
+    public bool isPressing = false;
     private float pressStartTime = 0f;
     public float longPressDuration = 0.5f; // Adjust this duration as needed
     
@@ -50,15 +50,6 @@ public class Rotation : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            isPressing = true;
-            pressStartTime = Time.time;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isPressing = false;
-        }
 
         if (isPressing && Time.time - pressStartTime > longPressDuration)
         {
