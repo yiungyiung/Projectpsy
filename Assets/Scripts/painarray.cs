@@ -9,6 +9,13 @@ public class painarray : MonoBehaviour
     public List<string> data = new List<string>();
     [SerializeField]
     TMP_Text Text;
+    [SerializeField]
+    TMP_InputField register_username;
+    [SerializeField]
+    TMP_InputField age;
+    [SerializeField]
+    TMP_InputField gender;
+    public firebase fb;
     public void singledata(float init)
     {   
         i=0;
@@ -48,6 +55,18 @@ public class painarray : MonoBehaviour
        }
     }
 
+    public void senddata()
+    {   GameObject[] gameObjects;
+        gameObjects = GameObject.FindGameObjectsWithTag("Finish");
+        foreach (GameObject gameObject in gameObjects)
+        {
+            string s = "Pain Location at  "+gameObject.transform.position;
+             data.Add(s);
+        }
+        fb.AddDataEntry(register_username.text,data,age.text,gender.text);
+        data.Clear();
+        Text.text="";
+    }
 }
 
 
