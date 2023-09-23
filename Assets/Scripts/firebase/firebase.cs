@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using System;
+using UnityEngine.SceneManagement;
 public class firebase : MonoBehaviour
 {
  private DatabaseReference reference;
@@ -21,7 +22,7 @@ public class firebase : MonoBehaviour
         var time=DateTime.Now;
         string userId = name; // Replace with your method to obtain user identifier
         DatabaseReference userReference = reference.Child(userId);
-        DatabaseReference timeReference = userReference.Child(""+time+" "+age+" "+gender+" ");
+        DatabaseReference timeReference = userReference.Child(""+time+" "+age+" "+gender+" "+SceneManager.GetActiveScene().name+" ");
         
         foreach (string s in yourList)
         {

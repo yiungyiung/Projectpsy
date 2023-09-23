@@ -10,10 +10,12 @@ public class movesoham : MonoBehaviour
     {
         knee,
         elbow,
+        wrist,
     };
     enum angle{
         x,
         y,
+        xy,
     };
     [SerializeField]
     angle ang= new angle();
@@ -23,6 +25,10 @@ public class movesoham : MonoBehaviour
     int kneedeviation;
     [SerializeField]
     int elbowdeviation;
+    [SerializeField]
+    int wristdeviationx;
+    [SerializeField]
+    int wristdeviationy;
     float gyrox;
     float gyroy;
     float accx;
@@ -143,6 +149,9 @@ public class movesoham : MonoBehaviour
                 case joint.knee:
                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_x+kneedeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
                     break;
+                case joint.wrist:
+                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(leg.transform.localRotation.x,-1*angle_x-wristdeviationx+kneedeviation,angle_y-wristdeviationy)),1f);
+                     break;
             }
             switch (ang){
             case angle.x:
@@ -150,6 +159,9 @@ public class movesoham : MonoBehaviour
                 break;
             case angle.y:
                 angText.text = "ANGLE: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+"° ";
+                break;
+            case angle.xy:
+                angText.text = "ANGLEX: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.y)))+"° ANGLEY:"+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.y)));
                 break;
             }
             

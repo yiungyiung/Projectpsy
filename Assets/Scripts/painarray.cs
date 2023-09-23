@@ -62,6 +62,7 @@ public class painarray : MonoBehaviour
         {
             string s = "Pain Location at  "+gameObject.transform.position;
              data.Add(s);
+             Destroy(gameObject);
         }
         fb.AddDataEntry(register_username.text,data,age.text,gender.text);
         data.Clear();
