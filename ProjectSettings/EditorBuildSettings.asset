@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/knee 1.unity
     guid: 05080bafe5330bc4894a30a90de0ed8c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/elbow.unity
     guid: e201c808cbf95574f8f99dd7a6bd2322
   - enabled: 0
