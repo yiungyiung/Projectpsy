@@ -17,6 +17,7 @@ public class movesoham : MonoBehaviour
         y,
         xy,
     };
+   public int max , min=1000;
     [SerializeField]
     angle ang= new angle();
     [SerializeField]
@@ -139,7 +140,7 @@ public class movesoham : MonoBehaviour
             int angle_y = (int)((alpha * accy + (1 - alpha) * filteredY) * scale);
 
             // Rest of the code...
-            Debug.Log(angle_y);
+          
             switch (js)
             {
                 
@@ -147,7 +148,8 @@ public class movesoham : MonoBehaviour
                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_y+elbowdeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
                     break;
                 case joint.knee:
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_x+kneedeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
+                    angle_x=-1*angle_x+kneedeviation;
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
                     break;
                 case joint.wrist:
                      leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(leg.transform.localRotation.x,-1*angle_x-wristdeviationx+kneedeviation,angle_y-wristdeviationy)),1f);
@@ -155,17 +157,31 @@ public class movesoham : MonoBehaviour
             }
             switch (ang){
             case angle.x:
-                angText.text = "ANGLE: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+"° ";
+                int gg=((int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))-90)*-1;
+                if(gg>max)
+                    {
+                        max=gg;
+                    }
+                    if(gg<min)
+                    {
+                        min=gg;
+                    }
+                angText.text = "ANGLE: "+gg.ToString()+"° ";
                 break;
             case angle.y:
                 angText.text = "ANGLE: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+"° ";
                 break;
             case angle.xy:
-                angText.text = "ANGLEX: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.y)))+"° ANGLEY:"+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.y)));
+                angText.text = "ANGLEX: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.z)))+"° ANGLEY:"+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.y)));
                 break;
             }
             
         }
+    }
+    public void resetminmax()
+    {
+        max=0;
+        min=1000;
     }
 }
 

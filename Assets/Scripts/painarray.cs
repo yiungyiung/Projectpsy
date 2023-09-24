@@ -16,6 +16,7 @@ public class painarray : MonoBehaviour
     [SerializeField]
     TMP_InputField gender;
     public firebase fb;
+    public movesoham mv;
     public void singledata(float init)
     {   
         i=0;
@@ -64,6 +65,8 @@ public class painarray : MonoBehaviour
              data.Add(s);
              Destroy(gameObject);
         }
+        string ss = "max:"+ mv.max + ", min:" + mv.min ;
+        data.Add(ss);
         fb.AddDataEntry(register_username.text,data,age.text,gender.text);
         data.Clear();
         Text.text="";
