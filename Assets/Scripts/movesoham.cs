@@ -17,7 +17,7 @@ public class movesoham : MonoBehaviour
         y,
         xy,
     };
-   public int max , min=1000;
+   public int max , min=0;
     [SerializeField]
     angle ang= new angle();
     [SerializeField]
@@ -105,6 +105,7 @@ public class movesoham : MonoBehaviour
         PlayerPrefs.SetFloat("errax", errax);
         PlayerPrefs.SetFloat("erray", erray);
         Debug.Log("cali complete");
+        resetminmax();
     }
     public void cancal()
     {
@@ -143,7 +144,6 @@ public class movesoham : MonoBehaviour
             int angle_x = (int)((alpha * accx + (1 - alpha) * filteredX) * scale);
             int angle_y = (int)((alpha * accy + (1 - alpha) * filteredY) * scale);
 
-            // Rest of the code...
           
             switch (js)
             {
@@ -196,7 +196,7 @@ public class movesoham : MonoBehaviour
     public void resetminmax()
     {
         max=0;
-        min=1000;
+        min=0;
     }
 }
 
