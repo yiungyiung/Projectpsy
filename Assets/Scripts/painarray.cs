@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 public class painarray : MonoBehaviour
 {   
     int i=0;
@@ -14,7 +15,7 @@ public class painarray : MonoBehaviour
     [SerializeField]
     TMP_InputField age;
     [SerializeField]
-    TMP_InputField gender;
+    Dropdown gender;
     public firebase fb;
     public movesoham mv;
     public void singledata(float init)
@@ -67,7 +68,7 @@ public class painarray : MonoBehaviour
         }
         string ss = "max:"+ mv.max + ", min:" + mv.min ;
         data.Add(ss);
-        fb.AddDataEntry(register_username.text,data,age.text,gender.text);
+        fb.AddDataEntry(register_username.text,data,age.text,gender.options[gender.value].text);
         data.Clear();
         Text.text="";
     }
