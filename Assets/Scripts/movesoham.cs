@@ -129,7 +129,11 @@ public class movesoham : MonoBehaviour
             gyroy = float.Parse(data[1]) + (-1) * errgy;
             accx = float.Parse(data[2]) + (-1) * errax;
             accy = float.Parse(data[3]) + (-1) * erray;
-
+            
+            if(accy>10)
+            {
+                Debug.Log("Punched");
+            }
             // Kalman filter prediction and update
             float filteredX = kalmanX.PredictAndUpdate(gyrox);
             float filteredY = kalmanY.PredictAndUpdate(gyroy);
@@ -145,19 +149,24 @@ public class movesoham : MonoBehaviour
             {
                 
                 case joint.elbow:
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_y+elbowdeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
+                    angle_y=-1*angle_y+elbowdeviation;
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_y+elbowdeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
+                     int ggs=((int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+elbowdeviation)*-1;
+                if(ggs>max)
+                    {
+                        max=ggs;
+                    }
+                    if(ggs<min)
+                    {
+                        min=ggs;
+                    }
+                angText.text = "ANGLE: "+ggs.ToString()+"° ";
                     break;
+
                 case joint.knee:
-                    angle_x=-1*angle_x+kneedeviation;
-                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(angle_x,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
-                    break;
-                case joint.wrist:
-                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(leg.transform.localRotation.x,-1*angle_x-wristdeviationx+kneedeviation,angle_y-wristdeviationy)),1f);
-                     break;
-            }
-            switch (ang){
-            case angle.x:
-                int gg=((int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))-90)*-1;
+                    angle_y=-1*angle_y+kneedeviation;
+                    leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_y,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
+                    int gg=((int)(-2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w))))*-1;
                 if(gg>max)
                     {
                         max=gg;
@@ -167,9 +176,15 @@ public class movesoham : MonoBehaviour
                         min=gg;
                     }
                 angText.text = "ANGLE: "+gg.ToString()+"° ";
+                    break;
+                case joint.wrist:
+                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(leg.transform.localRotation.x,-1*angle_x-wristdeviationx+kneedeviation,angle_y-wristdeviationy)),1f);
+                     break;
+            }
+            switch (ang){
+            case angle.x:
                 break;
             case angle.y:
-                angText.text = "ANGLE: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+"° ";
                 break;
             case angle.xy:
                 angText.text = "ANGLEX: "+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.z)))+"° ANGLEY:"+(int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.y)));

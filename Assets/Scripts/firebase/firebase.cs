@@ -19,10 +19,15 @@ public class firebase : MonoBehaviour
     
     public void AddDataEntry(string name,List<string> yourList,string age,string gender)
     {   
-        var time=DateTime.Now;
-        Debug.Log(time);
-        string tim=time.ToString();
-        tim=tim.Replace("/","-");
+        var time = DateTime.Now;
+Debug.Log(time);
+
+// Format the DateTime according to the specified pattern
+string tim = time.ToString("M-d-yyyy h:mm:ss tt");
+
+// Now tim should have the formatted timestamp
+Debug.Log(tim);
+
         string userId = name; // Replace with your method to obtain user identifier
         DatabaseReference userReference = reference.Child(userId);
         DatabaseReference timeReference = userReference.Child(" "+tim+" "+age+" "+gender+" "+SceneManager.GetActiveScene().name+" ");
