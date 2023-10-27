@@ -47,7 +47,7 @@ public class movesoham : MonoBehaviour
     KalmanFilter kalmanXa;
     [SerializeField]
     TMP_Text angText;
-
+    public int gg;
     int sample_size = 500;
     int scale = 10;
 
@@ -151,22 +151,22 @@ public class movesoham : MonoBehaviour
                 case joint.elbow:
                     angle_y=-1*angle_y+elbowdeviation;
                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_y+elbowdeviation,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);
-                     int ggs=((int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+elbowdeviation)*-1;
-                if(ggs>max)
+                    gg=((int)(2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w)))+elbowdeviation)*-1;
+                if(gg>max)
                     {
-                        max=ggs;
+                        max=gg;
                     }
-                    if(ggs<min)
+                    if(gg<min)
                     {
-                        min=ggs;
+                        min=gg;
                     }
-                angText.text = "ANGLE: "+ggs.ToString()+"° ";
+                angText.text = "ANGLE: "+gg.ToString()+"° ";
                     break;
 
                 case joint.knee:
                     angle_y=-1*angle_y+kneedeviation;
                     leg.transform.localEulerAngles =  Vector3.Lerp(new Vector3(leg.transform.localRotation.x,leg.transform.localRotation.y,leg.transform.localRotation.z),(new Vector3(-1*angle_y,leg.transform.localRotation.y,leg.transform.localRotation.z)),1f);  
-                    int gg=((int)(-2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w))))*-1;
+                    gg=((int)(-2 * (Mathf.Rad2Deg * Mathf.Acos(leg.transform.localRotation.w))))*-1;
                 if(gg>max)
                     {
                         max=gg;

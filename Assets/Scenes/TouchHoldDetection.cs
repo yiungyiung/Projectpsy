@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class TouchHoldDetection : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {   
     public painarray pain;
-    public GameObject legang;
+    public movesoham legang;
     private bool isBeingHeld = false;
     private float holdTime = 1.0f; // Adjust this time threshold as needed
     private float touchStartTime;
@@ -16,7 +16,7 @@ public class TouchHoldDetection : MonoBehaviour, IPointerDownHandler, IPointerUp
         isBeingHeld = true;
         touchStartTime = Time.time;
         //startangle=2*(Mathf.Rad2Deg*legang.transform.localRotation.x);
-        startangle = 2 * (Mathf.Rad2Deg * Mathf.Acos(legang.transform.localRotation.w));
+        startangle = legang.gg;
 
     }
 
@@ -31,7 +31,7 @@ public class TouchHoldDetection : MonoBehaviour, IPointerDownHandler, IPointerUp
         }
         else
         {   
-            float lastang=2 *(Mathf.Rad2Deg*Mathf.Acos(legang.transform.localRotation.w));
+            float lastang=((legang.gg));
             Debug.Log("Hold");
             pain.rangedata(startangle,lastang);
         }
