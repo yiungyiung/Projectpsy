@@ -39,4 +39,33 @@ Debug.Log(tim);
         }
     }
     
+ public void ReadName(string name,Action<IEnumerable<DataSnapshot>> onComplete)
+    {
+        reference.Child(name).GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                IEnumerable<DataSnapshot> childrenList = snapshot.Children;
+                onComplete?.Invoke(childrenList);
+                // Iterate through the children of the snapshot
+                /*foreach (var childSnapshot in snapshot.Children)
+                {   
+                    string entryId = childSnapshot.Key;
+                    string entryData = childSnapshot.Value.ToString();
+
+                    Debug.Log(entryId);
+                foreach (var grandChildSnapshot in childSnapshot.Children)
+                {
+                    string dataEntryId = grandChildSnapshot.Key;
+                    string dataEntry = grandChildSnapshot.Value.ToString();
+                    Debug.Log(dataEntry);
+                }
+                Debug.Log("*************************************************************");
+            }
+            */
+            }
+        });
+    }
+
 }
